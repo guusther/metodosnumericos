@@ -1,3 +1,14 @@
+from sympy import symbols
+from sympy import diff
+from sympy import lambdify
+
+x = symbols('x')
+def calcularDerivada(expressao):
+    
+    derivadaSimbolica = diff(expressao, x)
+    derivada = lambdify(x, derivadaSimbolica)
+    return derivada
+
 
 def funcao(x):
     return x**3 - x - 2
@@ -64,6 +75,26 @@ def secante(x0, x1,funcao, tolerancia):
             x1 = x2
         print("================================================")
 
+def newton(x0, funcao, tolerancia):
+    i = 0
+
+    derfx0 = calcularDerivada(x**3 - x - 2)
+    while True:
+        print(f"Iteração {i + 1}")
+        i = i + 1
+        fx0 = funcao(x0)
+        derfx0arm = derfx0(x0)
+
+        print(f"x atual: {x0}")
+        print(f"f(x0): {fx0}")
+        print(f"f'(x0): {derfx0arm}")
+
+        x1 = x0 - (fx0 / derfx0arm)
+        if abs(funcao(x1)) < tolerancia:
+            break
+        else:
+            x0 = x1
+        print("==========================================")
 
 
 bissecao(1, 2, funcao, 0.01)                                    
@@ -71,3 +102,5 @@ print("||||||||||||||||||||||||||||||||||||||||")
 falsa_posicao(1, 2, funcao, 0.01)
 print("||||||||||||||||||||||||||||||||||||||||")
 secante(1, 2, funcao, 0.01)
+print("||||||||||||||||||||||||||||||||||||||||")
+newton(2, funcao, 0.01)
