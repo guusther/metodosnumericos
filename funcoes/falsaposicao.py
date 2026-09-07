@@ -2,9 +2,6 @@ from sympy import symbols
 from sympy import diff
 from sympy import lambdify
 
-def funcao(x):
-    return x**3 - x - 2
-
 def falsa_posicao(limA, limB, funcao, tolerancia):
     historico = []
     print("\\FALSA POSIÇÃO////")

@@ -5,9 +5,6 @@ from derivada import calcularDerivada
 
 x = symbols('x')
 
-def funcao(x):
-    return x**3 - x - 2
-
 def newton(x0, funcao, tolerancia):
     i = 1
     historico = []
@@ -23,11 +20,11 @@ def newton(x0, funcao, tolerancia):
         print(f"f'(x0): {derfx0arm}")
 
         x1 = x0 - (fx0 / derfx0arm)
+        historico.append({"iteração": i, "x": x0, "fx": fx0, "f'x": derfx0arm})
         if abs(funcao(x1)) < tolerancia:
             break
         else:
             x0 = x1
-        historico.append({"iteração": i, "x": x0, "fx": fx0, "f'x": derfx0arm})
         print("==========================================")
     return historico
 
