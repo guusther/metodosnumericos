@@ -17,7 +17,7 @@ def bissecao(limA, limB, funcao, tolerancia):
             limB = medio
         else:
             limA = medio
-        historico.append({"iteracao": i, "x_medio" : medio, "fx" : fx})
+        historico.append({"iteracao": i, "x" : medio, "fx" : fx})
         print(f"Os limites no momento são: [{limA}, {limB}]")
         print("=====================================")
 

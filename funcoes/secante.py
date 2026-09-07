@@ -17,7 +17,7 @@ def secante(x0, x1,funcao, tolerancia):
         fx2 = funcao(x2)
         print(f"x2 atual: {x2}")
         print(f"f(x2) atual: {fx2}")
-        historico.append({"iteracao" : i, "x2" : x2, "fx2" : fx2})
+        historico.append({"iteracao" : i, "x" : x2, "fx" : fx2})
         if abs(fx2) < tolerancia:
             break
         else:
