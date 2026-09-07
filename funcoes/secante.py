@@ -4,10 +4,12 @@ from sympy import lambdify
 
 
 def secante(x0, x1,funcao, tolerancia):
-     i = 1
+     
      historico = []
      while True:
-        print(f"Iteração {i + 1}:")
+        i = len(historico) + 1
+        print(f"Iteração {i}:")
+        
         print(f"x0 e x1 atuais: {x0} e {x1}")
         fx1 = funcao(x1)
         fx0 = funcao(x0)

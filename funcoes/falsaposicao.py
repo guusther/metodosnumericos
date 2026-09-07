@@ -4,10 +4,10 @@ from sympy import lambdify
 
 def falsa_posicao(limA, limB, funcao, tolerancia):
     historico = []
-    print("\\FALSA POSIÇÃO////")
     print(f"intervalo inicial: [{limA}, {limB}]")
-    i = 1
+    
     while limB - limA > tolerancia:
+        i = len(historico) + 1
         print(f"Iteração {i + 1}:")
         fA = funcao(limA)
         fB = funcao(limB)

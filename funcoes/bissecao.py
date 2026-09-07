@@ -6,10 +6,11 @@ def bissecao(limA, limB, funcao, tolerancia):
     historico = []
 
     print(f"intervalo inicial: [{limA}, {limB}]")
-    i = 1
+    
     while limB - limA > tolerancia:
-        print(f"Iteração {i + 1}:")
-        i = i + 1
+        i = len(historico) + 1
+        print(f"Iteração {i}:")
+        
         medio = (limA + limB)/2
         fx = funcao(medio)
         if (funcao(limA) < 0 and fx > 0) or (funcao(limA) > 0 and fx < 0):
@@ -21,8 +22,6 @@ def bissecao(limA, limB, funcao, tolerancia):
         print("=====================================")
 
     return historico
-
-print(bissecao(1, 2, funcao, 0.01))
 
 
 
