@@ -1,7 +1,3 @@
-from sympy import symbols
-from sympy import diff
-from sympy import lambdify
-
 
 def secante(x0, x1,funcao, tolerancia):
      
@@ -13,7 +9,7 @@ def secante(x0, x1,funcao, tolerancia):
         fx1 = funcao(x1)
         fx0 = funcao(x0)
 
-        if fx1 - fx2 == 0:
+        if fx1 - fx0 == 0:
             raise ValueError(f"Divisão por zero: f(x1)=f(x2) em x0={x0}, x1={x1}")
         x2 = x1 - fx1 * ((x1 - x0) / (fx1 - fx0))
         fx2 = funcao(x2)

@@ -1,14 +1,12 @@
 from sympy import symbols
-from sympy import diff
-from sympy import lambdify
 from .derivada import calcularDerivada
 
 x = symbols('x')
 
-def newton(x0, funcao, tolerancia):
+def newton(x0, expressao, funcao, tolerancia):
     
     historico = []
-    derfx0 = calcularDerivada(x**3 - x - 2)
+    derfx0 = calcularDerivada(expressao)
     while True:
         i = len(historico) + 1
         

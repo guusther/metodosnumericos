@@ -1,7 +1,3 @@
-from sympy import symbols
-from sympy import diff
-from sympy import lambdify
-
 def bissecao(limA, limB, funcao, tolerancia):
     if funcao(limA) * funcao(limB) > 0:
         raise ValueError(f"Não há garantia de raiz no intervalo [{limA}, {limB}]: f(limA) e f(limB) têm o mesmo sinal")
