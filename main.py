@@ -3,8 +3,11 @@ from funcoes.falsaposicao import falsa_posicao
 from funcoes.secante import secante
 from funcoes.newton import newton
 
+from tabulate import tabulate
+
 import plotly.graph_objects as go
 import numpy as np
+from plotly.subplots import make_subplots
 
 from sympy import symbols, sympify, lambdify
 
@@ -26,6 +29,38 @@ def montar_grafico(x_vals, y_vals, metodos):
     fig.update_layout(title="Convergência dos métodos de zero de função", xaxis_title="x", yaxis_title="f(x)")
 
     return fig
+
+def exibir_grid(limA, limB, funcao, resultados):
+    nomes_metodos = [metodo for historico, metodo in resultados]
+    fig = make_subplots(rows=2, cols=2, subplot_titles=nomes_metodos)
+
+    x_dominio = np.linspace(limA, limB, 200)
+    y_dominio = [funcao(x) for x in x_dominio]
+
+    coordenadas = [(1,1), (1,2), (2,1), (2,2)]
+
+    for(historico, metodo), (linha, coluna) in zip(resultados, coordenadas):
+        fig.add_trace(go.Scatter(
+            x = x_dominio, y=y_dominio, mode="lines", line=dict(color="blue"), name="f(x)",
+            showlegend=(linha == 1 and coluna == 1)
+        ), row=linha, col=coluna)
+
+        x_hist = [p["x"] for p in historico]
+        y_hist = [p["fx"] for p in historico]
+        rotulos = [f"i={p.get('iteracao', p.get('iteração'))}" for p in historico]
+
+        fig.add_trace(
+            go.Scatter(
+                x=x_hist, y=y_hist, mode="markers+text",
+                text=rotulos, textposition="top center", name=metodo
+            ),
+            row=linha, col=coluna
+        )
+
+        fig.add_hline(y=0, line_dash="dash", line_color="black", opacity = 0.5, row=linha, col=coluna)
+
+    fig.update_layout(title="Comparação dos métodos(grid 2x2)", height=800)
+    fig.write_html("relatorio_grid.html",auto_open=True)
 
 def funcao():
     texto_usuario = input("Digita a função: (ex: x**3 - x - 2)")
@@ -74,36 +109,33 @@ def executar():
     elif escolha == "4":
         x0 = pedir_chute()
         limA, limB = x0 - 2, x0 + 2
+    elif escolha == "5":
+        x0 = pedir_chute()
+        limA, limB = pedir_intervalo()
 
     #lambda serve para criar uma funcao anonima que serve como um botao de pausa, fazendo ela
     #nao ser executada na hora
     algoritmo = {
-         "1": lambda: (bissecao(limA, limB, funcao_matematica, tolerancia), "Bisseção"),
-         "2": lambda: (falsa_posicao(limA, limB, funcao_matematica, tolerancia), "Falsa Posição"),
-         "3": lambda: (secante(limA, limB, funcao_matematica, tolerancia), "Secante"),
-         "4": lambda: (newton(x0, expressao, funcao_matematica, tolerancia), "Newton")
+         "1": lambda: [(bissecao(limA, limB, funcao_matematica, tolerancia), "Bisseção")],
+         "2": lambda: [(falsa_posicao(limA, limB, funcao_matematica, tolerancia), "Falsa Posição")],
+         "3": lambda: [(secante(limA, limB, funcao_matematica, tolerancia), "Secante")],
+         "4": lambda: [(newton(x0, expressao, funcao_matematica, tolerancia), "Newton")],
+         "5": lambda: [(bissecao(limA, limB, funcao_matematica, tolerancia), "Bisseção"), 
+                       (falsa_posicao(limA, limB, funcao_matematica, tolerancia), "Falsa Posição"),
+                       (secante(limA, limB, funcao_matematica, tolerancia), "Secante"),
+                       (newton(x0, expressao, funcao_matematica, tolerancia), "Newton")]
     }
-    historico, metodo = algoritmo[escolha]() #os () no final faz despausar a funcao
+    resultados = algoritmo[escolha]()
+    for historico, metodo in resultados:
+        print(f"--{metodo}--")
+        print(tabulate(historico, headers="keys", tablefmt="grid", floatfmt=".6f"))
 
-    exibir_relatorio(limA, limB, funcao_matematica, historico, metodo)
+    if escolha == "5":
+        exibir_grid(limA, limB, funcao_matematica, resultados)
+    else:
+        historico_unico, metodo_unico = resultados[0]
+        exibir_relatorio(limA, limB, funcao_matematica, historico_unico, metodo_unico)
 
 
 executar()
         
-"""
-linspace significa tipo: de 200 numeros entre 1 e 2 basicamente. Então se
-no lugar do 200 fosse 5 seria algo do tipo [1.0, 1.25, 1.5, 1.75, 2]
-Entretanto, ser 200 numeros faz com que a distancia seja bem menor q 0.25, portanto, quando o
-grafico for desenhado, será uma linha continua ao inves de pontos separados
-
-isso aqui eh a mesma coisa de um for com .append. Ele vai
-calcular funcao(x) para cada um dos 200 e guardar numa lista
-
-fig inicialmene eh uma tela em branco que ao decorrer vai sendo empilhada com 
-camadas de desenho
-
-o go.Scatter cria uma camada de desenho. Ela re
-fig.add_trace(go.Scattcebe duas listas paralelas, sendo
-nesse caso as listas dos valore de x e y. mode="lines" é pra ligar esses pontos 
-com uma linha e o name é o texto que aparece na legenda do gráfico
-"""
