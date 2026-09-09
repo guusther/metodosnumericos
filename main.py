@@ -70,38 +70,20 @@ def executar():
     if escolha in ("1", "2", "3"):
         
         limA, limB = pedir_intervalo()
-
-        if escolha == "1":
-            historico = bissecao(limA, limB, funcao_matematica, tolerancia)
-            metodo = "Bisseção"
-        elif escolha == "2":
-            historico = falsa_posicao(limA, limB, funcao_matematica, tolerancia)
-            metodo = "Falsa Posição"
-        elif escolha == "3":
-            historico = secante(limA, limB, funcao_matematica, tolerancia)
-            metodo = "Secante"
+        
     elif escolha == "4":
         x0 = pedir_chute()
         limA, limB = x0 - 2, x0 + 2
-        historico = newton(x0, expressao, funcao_matematica, tolerancia)
-        metodo = "Newton"
-    elif escolha == "5":
-        limA, limB = pedir_intervalo()
-        x0 = pedir_chute()
 
-        historico_bissecao = bissecao(limA, limB, funcao_matematica, tolerancia)
-        historico_falsaposicao = falsa_posicao(limA, limB, funcao_matematica, tolerancia)
-        historico_secante = secante(limA, limB, funcao_matematica, tolerancia)
-        historico_newton = newton(x0, expressao, funcao_matematica, tolerancia)
-
-        metodos_todos = {
-            "Bisseção" : historico_bissecao,
-            "Falsa Posição": historico_falsaposicao,
-            "Secante": historico_secante,
-            "Newton": historico_newton
-        }
-        fig = montar_grafico(np.linspace(limA, limB, 200), [funcao_matematica(x) for x in np.linspace(limA, limB, 200)], metodos_todos)
-        fig.write_html("relatorio.html", auto_open=True)
+    #lambda serve para criar uma funcao anonima que serve como um botao de pausa, fazendo ela
+    #nao ser executada na hora
+    algoritmo = {
+         "1": lambda: (bissecao(limA, limB, funcao_matematica, tolerancia), "Bisseção"),
+         "2": lambda: (falsa_posicao(limA, limB, funcao_matematica, tolerancia), "Falsa Posição"),
+         "3": lambda: (secante(limA, limB, funcao_matematica, tolerancia), "Secante"),
+         "4": lambda: (newton(x0, expressao, funcao_matematica, tolerancia), "Newton")
+    }
+    historico, metodo = algoritmo[escolha]() #os () no final faz despausar a funcao
 
     exibir_relatorio(limA, limB, funcao_matematica, historico, metodo)
 

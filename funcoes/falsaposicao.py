@@ -2,7 +2,7 @@ def falsa_posicao(limA, limB, funcao, tolerancia):
     if funcao(limA) * funcao(limB) > 0:
             raise ValueError(f"Não há garantia de raiz no intervalo [{limA}, {limB}]: f(limA) e f(limB) têm o mesmo sinal")
     historico = []
-    print(f"intervalo inicial: [{limA}, {limB}]")
+    
     
     while True:
         i = len(historico) + 1
