@@ -28,7 +28,7 @@ cd metodosnumericos
 
 2. Instale as dependências
 ```bash
-pip install streamlit plotly sympy numpy
+pip install streamlit plotly sympy numpy tabulate
 ```
 3. Inicie o Servidor Local
 ```bash
