@@ -14,25 +14,30 @@ funcoes/derivada.py  - calculo de derivada simbolica (usado por Newton, via symp
 
 main.py              - ponto de entrada: chama os 4 metodos e gera o relatorio grafico
 
+interface.py - mesma coisa que o main, porém com interface web.
+
 
 COMO RODAR
 -----------
-1. Instalar as dependencias (Python 3 e pip precisam estar instalados):
+1. Clone o repositório e acesse a pasta
+```bash 
+git clone https://github.com/guusther/metodosnumericos
 
-   pip install -r requirements.txt
+cd metodosnumericos
+```
 
-2. Rodar o programa:
-
-   python main.py
-
-Isso executa os 4 metodos sobre f(x) = x^3 - x - 2 no intervalo [1, 2],
-e gera um arquivo relatorio.html com um grafico interativo (zoom, hover)
-comparando a convergencia de cada metodo. O arquivo abre automaticamente
-no navegador.
-
-
-TRATAMENTO DE ERRO
+2. Instale as dependências
+```bash
+pip install streamlit plotly sympy numpy
+```
+3. Inicie o Servidor Local
+```bash
+streamlit run interface.py
+```
+Exemplos para teste
 --------------------
-Bissecao e Falsa Posicao verificam se ha troca de sinal no intervalo
-antes de iniciar. Newton e Secante verificam divisao por zero (derivada
-nula / diferenca de f(x) nula) durante a execucao.
+Trigonométrica: cos(x) - x | Intervalo: [0, 1] | Chute inicial: 0.5 | Tolerância: 0.0001
+
+Polinomial: x**3 + x - 10 | Intervalo: [1, 3] | Chute inicial: 1.5 | Tolerância: 0.00001
+
+Logarítmica: 1 - x*log(x) | Intervalo: [1, 2] | Chute inicial: 1.5 | Tolerância: 0.0001
