@@ -63,6 +63,8 @@ def substituicao_retroativa(matriz):
 def resolver_sistema(matriz):
     matriz = eliminacao_gauss(matriz)
     solucoes = substituicao_retroativa(matriz)
+
+    solucoes = [round(valor, 3) for valor in solucoes]
     return solucoes
 
 a, b = receber_sistema()
