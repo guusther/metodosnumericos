@@ -23,14 +23,18 @@ def montar_matriz_aumentada(A,b):
         matriz_aumentada.append(A[i])
     return matriz_aumentada
 
+def encontrar_linha_pivo(matriz, p):
+    linha_pivo = p
+
+    for i in range(p + 1, len(matriz)):
+        if abs(matriz[i][p]) > abs(matriz[linha_pivo][p]):
+            linha_pivo = i
+    return linha_pivo
+
 def eliminacao_gauss(matriz):
     for p in range(len(matriz) - 1):
 
-        linha_pivo = p
-
-        for i in range(p + 1, len(matriz)):
-            if abs(matriz[i][p] > abs(matriz[linha_pivo][p])):
-                linha_pivo = i
+        linha_pivo = encontrar_linha_pivo(matriz, p)
 
         if abs(matriz[linha_pivo][p]) < 1e-12:
             raise ValueError("Sistema sem solucao unica.")
@@ -67,8 +71,10 @@ def resolver_sistema(matriz):
     solucoes = [round(valor, 3) for valor in solucoes]
     return solucoes
 
-a, b = receber_sistema()
-matriz = montar_matriz_aumentada(a, b)
+if __name__ == "__main__":
+    a, b = receber_sistema()
+    matriz = montar_matriz_aumentada(a, b)
 
-resultado = resolver_sistema(matriz)
-print("Soluções:", resultado)
+    resultado = resolver_sistema(matriz)
+    print("Soluções:", resultado)
+
