@@ -31,10 +31,15 @@ def calcular_novas_aproximacoes(matriz, b, aproximacoes_anteriores):
         
         novas_aproximacoes = criar_lista(num_incognitas)
         for i in range(num_incognitas):
+            if matriz[i][i] == 0:
+                raise ValueError("Não é possível aplicar Jacobi: existe um zero na diagonal principal")
+            
             soma = 0
             for j in range(num_incognitas):
                 if i != j:
                     soma += matriz[i][j] * aproximacoes_anteriores[j]
+                    
+                                        
             novas_aproximacoes[i] = (b[i] - soma)/ matriz[i][i] 
         erro = calcular_erro(aproximacoes_anteriores, novas_aproximacoes)
         aproximacoes_anteriores = novas_aproximacoes       
