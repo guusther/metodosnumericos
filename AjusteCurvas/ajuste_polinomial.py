@@ -47,7 +47,12 @@ def montar_termo(grau, pontos):
 def matriz_aumentada(matriz, termos):
     return montar_matriz_aumentada(matriz, termos)    
 
-
+def calcular_polinomio(coeficientes, x):
+    resultado = 0
+    
+    for i in range(len(coeficientes)):
+        resultado += coeficientes[i] * (x ** i)
+    return resultado
     
 if __name__ == "__main__":
     pontos = pedir_ponto()
@@ -59,5 +64,7 @@ if __name__ == "__main__":
     matriz = montar_matriz_aumentada(matriz, termos)
     
     coeficientes = resolver_sistema(matriz)
+    resultado = calcular_polinomio(coeficientes, 3)
     
     print("Coeficientes:", coeficientes)
+    print("Resultado: ", resultado)
