@@ -54,9 +54,22 @@ def calcular_polinomio(coeficientes, x):
         resultado += coeficientes[i] * (x ** i)
     return resultado
     
+def validar_dados(grau, pontos):
+    qtd_pontos = len(pontos)
+    if qtd_pontos < grau + 1:
+        raise ValueError("quantidade insuficiente de pontos.")
+    
+    valores_x = [x for x, y in pontos]
+    qtd_x_distintos = len(set(valores_x))
+    
+    if qtd_x_distintos < grau + 1:
+        raise ValueError("quantidade insuficiente de valores de x distintos.")
+
 if __name__ == "__main__":
     pontos = pedir_ponto()
     grau = pedir_grau()
+    
+    validar_dados(grau, pontos)
     
     matriz = montar_matriz_normal(grau, pontos)
     termos = montar_termo(grau, pontos)
@@ -64,7 +77,7 @@ if __name__ == "__main__":
     matriz = montar_matriz_aumentada(matriz, termos)
     
     coeficientes = resolver_sistema(matriz)
-    resultado = calcular_polinomio(coeficientes, 3)
+    resultado = calcular_polinomio(coeficientes, 1)
     
     print("Coeficientes:", coeficientes)
     print("Resultado: ", resultado)
