@@ -68,7 +68,6 @@ def resolver_sistema(matriz):
     matriz = eliminacao_gauss(matriz)
     solucoes = substituicao_retroativa(matriz)
 
-    solucoes = [round(valor, 10) for valor in solucoes]
     return solucoes
 
 if __name__ == "__main__":
