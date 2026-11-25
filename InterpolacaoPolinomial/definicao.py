@@ -33,6 +33,38 @@ def validar_pontos(pontos):
     if len(valores_x) != len(set(valores_x)):
         raise ValueError("Os valores de x devem ser distintos")
 
+def formatar_polinomio(coeficientes):
+    termos = []
+
+    for grau, coeficiente in enumerate(coeficientes):
+
+        if abs(coeficiente) < 1e-12:
+            continue
+
+        valor = f"{abs(coeficiente):.4f}".rstrip("0").rstrip(".")
+
+        if grau == 0:
+            termo = valor
+
+        else:
+            variavel = "x" if grau == 1 else f"x^{grau}"
+
+            if abs(abs(coeficiente) - 1) < 1e-12:
+                termo = variavel
+            else:
+                termo = f"{valor}{variavel}"
+
+        if not termos:
+            if coeficiente < 0:
+                termo = "-" + termo
+
+        else:
+            sinal = " - " if coeficiente < 0 else " + "
+            termo = sinal + termo
+
+        termos.append(termo)
+
+    return "".join(termos) if termos else "0"
 
 if __name__ == "__main__":
     pontos = pedir_ponto()
@@ -43,7 +75,12 @@ if __name__ == "__main__":
 
     matriz = montar_matriz_aumentada(matriz, b)
     solucao = resolver_sistema(matriz)
-    resultado = calcular_polinomio(solucao, 4)
+    
+    polinomio = formatar_polinomio(solucao)
+    
+    x = float(input("Digite o valor que deseja interpolar"))
+    
+    resultado = calcular_polinomio(solucao, x)
 
-    print(solucao)
-    print(resultado)
+    print(f"\nPolinômio interpolador: P(x) = {polinomio}")
+    print(f"P({x}) = {resultado:.6f}")
