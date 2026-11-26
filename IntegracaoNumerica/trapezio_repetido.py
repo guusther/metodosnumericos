@@ -4,7 +4,7 @@ from sympy.core.sympify import SympifyError
 x = symbols('x')
 
 def pedir_funcao():
-    texto_usuario = input("Digita a função: (ex: x**3 - x - 2)")
+    texto_usuario = input("Digita a função: (ex: x**3 - x - 2): ")
     try:
         expressao = sympify(texto_usuario)
         funcao = lambdify(x, expressao)
