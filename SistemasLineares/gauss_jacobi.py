@@ -1,4 +1,5 @@
 from eliminacao_gauss import receber_sistema
+import math
 
 def descobrir_incognitas(matriz):
     return len(matriz[0])
@@ -41,6 +42,10 @@ def calcular_novas_aproximacoes(matriz, b, aproximacoes_anteriores):
                     
                                         
             novas_aproximacoes[i] = (b[i] - soma)/ matriz[i][i] 
+        
+        if any(math.isnan(v) or math.isinf(v) for v in novas_aproximacoes):
+            raise ValueError("O método divergiu (valores infinitos ou NaN).")    
+        
         erro = calcular_erro(aproximacoes_anteriores, novas_aproximacoes)
         aproximacoes_anteriores = novas_aproximacoes       
     

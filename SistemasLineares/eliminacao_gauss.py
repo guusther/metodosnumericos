@@ -48,6 +48,9 @@ def eliminacao_gauss(matriz):
             for j in range(len(matriz[i])):
                 matriz[i][j] = matriz[i][j] - (multiplicador * matriz[p][j])
 
+    if abs(matriz[-1][-2]) < 1e-12:
+        raise ValueError("Sistema sem solucao unica.")
+    
     return matriz
 
 def substituicao_retroativa(matriz):

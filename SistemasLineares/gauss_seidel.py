@@ -1,4 +1,4 @@
-
+import math
 from eliminacao_gauss import receber_sistema
 
 
@@ -42,6 +42,10 @@ def calcular_novas_aproximacoes(matriz, b, aproximacoes):
         aproximacoes_anteriores = aproximacoes.copy()
 
         for i in range(num_incognitas):
+            
+            if any(math.isnan(v) or math.isinf(v) for v in aproximacoes):
+                raise ValueError("O método divergiu (valores infinitos ou NaN).")
+            
             if abs(matriz[i][i]) < 1e-12:
                 raise ValueError(
                     "Não é possível aplicar Gauss-Seidel: "
