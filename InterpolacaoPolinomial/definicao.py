@@ -78,7 +78,7 @@ if __name__ == "__main__":
     
     polinomio = formatar_polinomio(solucao)
     
-    x = float(input("Digite o valor que deseja interpolar"))
+    x = float(input("Digite o valor que deseja interpolar: "))
     
     resultado = calcular_polinomio(solucao, x)
 

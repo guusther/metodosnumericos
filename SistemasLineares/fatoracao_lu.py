@@ -86,14 +86,14 @@ def exibir_solucoes(x):
     for i, valor in enumerate(x):
         print(f"x{i + 1} = {valor:.2f}")
 
+if __name__ == "__main__":
+    matriz, b = receber_sistema()
+    L, U, P = fatoracao_lu(matriz)
 
-matriz, b = receber_sistema()
-L, U, P = fatoracao_lu(matriz)
+    x = resolver_sistema_lu(matriz, b)
 
-x = resolver_sistema_lu(matriz, b)
-
-print("\n========== FATORAÇÃO LU ==========")
-exibir_matriz("Matriz L", L)
-exibir_matriz("Matriz U", U)
-exibir_matriz("Matriz P", P)
-exibir_solucoes(x)
+    print("\n========== FATORAÇÃO LU ==========")
+    exibir_matriz("Matriz L", L)
+    exibir_matriz("Matriz U", U)
+    exibir_matriz("Matriz P", P)
+    exibir_solucoes(x)
