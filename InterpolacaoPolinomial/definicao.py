@@ -66,7 +66,10 @@ def formatar_polinomio(coeficientes):
 
     return "".join(termos) if termos else "0"
 
+
 if __name__ == "__main__":
+    print("\n========== INTERPOLAÇÃO POLINOMIAL POR DEFINIÇÃO ==========")
+
     pontos = pedir_ponto()
     validar_pontos(pontos)
 
@@ -75,12 +78,18 @@ if __name__ == "__main__":
 
     matriz = montar_matriz_aumentada(matriz, b)
     solucao = resolver_sistema(matriz)
-    
-    polinomio = formatar_polinomio(solucao)
-    
-    x = float(input("Digite o valor que deseja interpolar: "))
-    
-    resultado = calcular_polinomio(solucao, x)
 
-    print(f"\nPolinômio interpolador: P(x) = {polinomio}")
-    print(f"P({x}) = {resultado:.6f}")
+    polinomio = formatar_polinomio(solucao)
+
+    valor_x = float(
+        input("\nDigite o valor que deseja interpolar: ")
+    )
+
+    resultado = calcular_polinomio(solucao, valor_x)
+
+    print("\n========== RESULTADO ==========")
+    print(f"Polinômio interpolador: P(x) = {polinomio}")
+    print(f"\nValor interpolado:")
+    print(f"P({valor_x}) = {resultado:.6f}")
+
+    print("\n==============================================")

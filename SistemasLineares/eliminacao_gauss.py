@@ -74,9 +74,19 @@ def resolver_sistema(matriz):
     return solucoes
 
 if __name__ == "__main__":
+    print("\n========== MÉTODO DE ELIMINAÇÃO DE GAUSS ==========")
+
     a, b = receber_sistema()
     matriz = montar_matriz_aumentada(a, b)
 
     resultado = resolver_sistema(matriz)
-    print("Soluções:", resultado)
+
+    print("\n========== RESULTADO ==========")
+    print("Soluções do sistema:\n")
+
+    for i, valor in enumerate(resultado):
+        print(f"x{i + 1} = {valor:.6f}")
+
+    print("\n==============================================")
+
 

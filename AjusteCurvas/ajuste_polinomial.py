@@ -64,20 +64,20 @@ def validar_dados(grau, pontos):
     
     if qtd_x_distintos < grau + 1:
         raise ValueError("quantidade insuficiente de valores de x distintos.")
-
-if __name__ == "__main__":
+def main():
     pontos = pedir_ponto()
     grau = pedir_grau()
-    
+
     validar_dados(grau, pontos)
-    
+
     matriz = montar_matriz_normal(grau, pontos)
     termos = montar_termo(grau, pontos)
-    
+
     matriz = montar_matriz_aumentada(matriz, termos)
-    
     coeficientes = resolver_sistema(matriz)
-    resultado = calcular_polinomio(coeficientes, 1)
-    
+
     print("Coeficientes:", coeficientes)
-    print("Resultado: ", resultado)
+
+
+if __name__ == "__main__":
+    main()

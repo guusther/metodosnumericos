@@ -56,12 +56,23 @@ def calcular_novas_aproximacoes(matriz, b, aproximacoes_anteriores):
         
 
 if __name__ == "__main__":
+    print("\n========== MÉTODO DE GAUSS-JACOBI ==========")
+
     matriz, b = receber_sistema()
+
     num_incognitas = len(matriz[0])
     aproximacoes_iniciais = criar_lista(num_incognitas)
+
     solucoes = calcular_novas_aproximacoes(
-        matriz, b, aproximacoes_iniciais
+        matriz,
+        b,
+        aproximacoes_iniciais
     )
 
+    print("\n========== RESULTADO ==========")
+    print("Soluções do sistema:\n")
+
     for i, valor in enumerate(solucoes):
-        print(f"x{i + 1} = {valor:.2f}")
+        print(f"x{i + 1} = {valor:.6f}")
+
+    print("\n==============================================")
