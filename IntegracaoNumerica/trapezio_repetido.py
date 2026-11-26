@@ -1,12 +1,16 @@
 from sympy import symbols, sympify, lambdify
+from sympy.core.sympify import SympifyError
 
 x = symbols('x')
 
 def pedir_funcao():
     texto_usuario = input("Digita a função: (ex: x**3 - x - 2)")
-    expressao = sympify(texto_usuario)
-    funcao = lambdify(x, expressao)
-    return expressao, funcao
+    try:
+        expressao = sympify(texto_usuario)
+        funcao = lambdify(x, expressao)
+        return expressao, funcao
+    except(SympifyError, SyntaxError, TypeError):
+        raise ValueError("A expressão matemática digitada é invalida.")
 
 def calculo_h(limA, limB, subintervalos):
     return (limB - limA) / subintervalos
@@ -21,9 +25,15 @@ def calculo_intermediarios(limA, h, subintervalos, funcao):
         x = limA + i * h
         soma += funcao( x)
     return 2 * soma
+
+def validar_subintervalos(subintervalos):
+    if subintervalos <= 0:
+        raise ValueError("A quantidade de subintervalos deve ser positiva e maior que zero.")
     
 def trapezio_repetido(limA, limB, funcao):
     subintervalos = pedir_subintervalos()
+    validar_subintervalos(subintervalos)
+    
     h = calculo_h(limA, limB, subintervalos)
     
     intermediarios = calculo_intermediarios(limA, h, subintervalos, funcao)
@@ -35,13 +45,28 @@ def trapezio_repetido(limA, limB, funcao):
     
     return I
 
+def pedir_limite(mensagem):
+    while True:
+        try:
+            limite = float(input(mensagem))
+            return limite
+        except ValueError:
+            print("Digite um valor numérico válido.")
+            
 def pedir_limites():
-    limA = float(input("Digite o valor do limite inferior:"))
-    limB = float(input("Digite o valor do limite superior:"))
+    limA = pedir_limite("Digite o valor do limite inferior:")
+    limB = pedir_limite("Digite o valor do limite superior:")
+    
     return limA, limB
-
+    
 if __name__ == "__main__":
+    
+    print("\n========== MÉTODO DOS TRAPÉZIOS REPETIDOS ==========")
+
     limA, limB = pedir_limites()
     expressao, funcao = pedir_funcao()
+
     resultado = trapezio_repetido(limA, limB, funcao)
-    print(resultado)
+
+    print("\n========== RESULTADO ==========")
+    print(f"Integral aproximada: {resultado:.6f}")
