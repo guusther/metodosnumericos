@@ -91,7 +91,7 @@ cd metodosnumericos
 2. Instale as dependências:
 
 ```bash
-pip install streamlit plotly sympy numpy tabulate
+pip install streamlit plotly sympy numpy pandas tabulate
 ```
 
 3. Para executar uma implementação, consulte o README da pasta correspondente. Cada módulo possui suas próprias instruções de execução.
