@@ -9,7 +9,7 @@ Implementação de dois métodos de interpolação polinomial em Python: Interpo
 - **Interpolação por Definição:** determina os coeficientes de um polinômio interpolador por meio de um sistema linear construído a partir dos pontos informados. A matriz utilizada é a matriz de Vandermonde.
 - **Interpolação de Newton:** constrói o polinômio interpolador utilizando diferenças divididas, organizadas em uma tabela para determinar seus coeficientes.
 
-Os três métodos determinam um polinômio que passa pelos pontos fornecidos, desde que os valores de x sejam distintos.
+Os dois métodos determinam um polinômio que passa pelos pontos fornecidos, desde que os valores de x sejam distintos.
 
 ## ESTRUTURA DO PROJETO
 
