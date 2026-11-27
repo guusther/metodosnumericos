@@ -2,7 +2,7 @@
 
 Trabalho da disciplina de Métodos Numéricos Computacionais (UFSM).
 
-Implementação de três métodos de interpolação polinomial em Python: Interpolação por Definição, Interpolação de Lagrange e Interpolação de Newton.
+Implementação de três métodos de interpolação polinomial em Python: Interpolação por Definição, Interpolação de Lagrange e Interpolação de Newton. O projeto também conta com uma interface gráfica que permite inserir pontos, visualizar os polinômios encontrados e comparar os resultados dos métodos.
 
 ## MÉTODOS IMPLEMENTADOS
 
@@ -17,6 +17,7 @@ Os três métodos determinam um polinômio que passa pelos pontos fornecidos, de
 ```text
 InterpolacaoPolinomial/
 │
+├── interface.py
 ├── definicao.py
 ├── lagrange.py
 ├── polinomio_newton.py
@@ -25,6 +26,7 @@ InterpolacaoPolinomial/
 
 **Arquivos principais:**
 
+- `interface.py` — interface gráfica desenvolvida com Streamlit, permitindo selecionar o método, editar os pontos conhecidos, calcular o polinômio e visualizar seu gráfico.
 - `definicao.py` — implementação da interpolação por definição, com montagem da matriz de Vandermonde e resolução do sistema linear.
 - `lagrange.py` — implementação do polinômio interpolador de Lagrange, incluindo cálculo e formatação do polinômio.
 - `polinomio_newton.py` — implementação do método de Newton, incluindo cálculo das diferenças divididas, montagem da tabela e avaliação do polinômio.
@@ -41,10 +43,10 @@ cd metodosnumericos
 2. Instale as dependências utilizadas pelo projeto:
 
 ```bash
-pip install sympy
+pip install sympy streamlit numpy plotly pandas
 ```
 
-3. Execute o método desejado:
+3. Execute o método desejado pelo terminal:
 
 **Interpolação por Definição**
 
@@ -64,7 +66,15 @@ python -m InterpolacaoPolinomial.lagrange
 python -m InterpolacaoPolinomial.polinomio_newton
 ```
 
+4. Para executar a interface gráfica:
+
+```bash
+streamlit run InterpolacaoPolinomial/interface.py
+```
+
 ## COMO UTILIZAR
+
+### Pelo terminal
 
 1. Informe a quantidade de pontos.
 2. Digite as coordenadas x e y de cada ponto.
@@ -73,6 +83,21 @@ python -m InterpolacaoPolinomial.polinomio_newton
 
 No método de Newton, também é apresentada a tabela de diferenças divididas.
 
+### Pela interface gráfica
+
+1. Selecione o método de interpolação desejado: Definição (Vandermonde), Lagrange ou Newton.
+2. Edite a tabela de pontos conhecidos, informando as coordenadas x e y.
+3. Informe o valor de x no qual deseja avaliar o polinômio.
+4. Clique no botão **Interpolar**.
+
+A interface apresenta:
+
+- O polinômio interpolador encontrado.
+- O resultado da avaliação P(x).
+- A quantidade de pontos utilizados.
+- O gráfico do polinômio interpolador e dos pontos informados.
+- A tabela de diferenças divididas, quando utilizado o método de Newton.
+
 ## OBSERVAÇÕES
 
 - São necessários pelo menos dois pontos.
@@ -80,4 +105,5 @@ No método de Newton, também é apresentada a tabela de diferenças divididas.
 - A quantidade de pontos determina o grau máximo do polinômio interpolador.
 - A implementação por definição utiliza funções da pasta `SistemasLineares` para resolver o sistema linear.
 - As implementações de Lagrange e Newton realizam diretamente os cálculos de seus respectivos métodos.
-
+- A interface gráfica utiliza Streamlit para apresentação e Plotly para geração dos gráficos.
+- Para executar a interface corretamente, recomenda-se iniciar o comando a partir da pasta principal do projeto.

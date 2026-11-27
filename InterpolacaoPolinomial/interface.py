@@ -1,5 +1,3 @@
-# Garante que a raiz do projeto esteja no caminho de importação,
-# mesmo quando o Streamlit inicia a interface a partir de outra pasta.
 from pathlib import Path
 import sys
 

@@ -1,5 +1,3 @@
-# Garante que a raiz do projeto esteja no caminho de importação,
-# mesmo quando o Streamlit inicia a interface a partir de outra pasta.
 from pathlib import Path
 import sys
 
@@ -151,10 +149,10 @@ if st.button("Calcular e visualizar", type="primary"):
         st.dataframe(tabela, use_container_width=True)
 
         if metodo == "Trapézios repetidos":
-            st.latex(r"I \\approx \\frac{h}{2}\\left[f(x_0)+2\\sum_{i=1}^{n-1}f(x_i)+f(x_n)\\right]")
+            st.latex(r"I \approx \frac{h}{2}\left[f(x_0)+2\sum_{i=1}^{n-1}f(x_i)+f(x_n)\right]")
             st.caption("Cada região sombreada é um trapézio: os lados superiores ligam dois pontos consecutivos da função.")
         else:
-            st.latex(r"I \\approx \\frac{h}{3}\\left[f(x_0)+4f(x_1)+2f(x_2)+\\cdots+f(x_n)\\right]")
+            st.latex(r"I \approx \frac{h}{3}\left[f(x_0)+4f(x_1)+2f(x_2)+\cdots+f(x_n)\right]")
             st.caption("Cada região sombreada é aproximada por uma parábola que passa por três nós consecutivos.")
     except Exception as erro:
         st.error(f"Não foi possível calcular a integral: {erro}")
