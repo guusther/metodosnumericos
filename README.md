@@ -21,7 +21,6 @@ metodosnumericos/
 │
 ├── InterpolacaoPolinomial/
 │   ├── definicao.py
-│   ├── lagrange.py
 │   ├── polinomio_newton.py
 │   └── README.md
 │
@@ -29,7 +28,6 @@ metodosnumericos/
 │   ├── eliminacao_gauss.py
 │   ├── fatoracao_lu.py
 │   ├── gauss_jacobi.py
-│   ├── gauss_seidel.py
 │   └── README.md
 │
 ├── ZerosDeFuncoes/
@@ -49,11 +47,9 @@ Cada pasta contém as implementações relacionadas a uma área específica dos 
 - Eliminação de Gauss;
 - Fatoração LU;
 - Gauss-Jacobi;
-- Gauss-Seidel.
 
 **Interpolação Polinomial**
 - Interpolação por definição;
-- Interpolação de Lagrange;
 - Interpolação de Newton.
 
 **Ajuste de Curvas**
